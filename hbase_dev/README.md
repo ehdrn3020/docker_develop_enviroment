@@ -24,3 +24,17 @@ sudo docker volume rm hbase_dev_namenode
 ```
 
 ## HBase 설치
+```aiignore
+docker exec -it hbase bash
+
+# 프로세스 확인
+ps aux | egrep 'HMaster|HRegionServer'
+
+# 쉘 접속
+hbase shell
+
+# 상태 확인
+status
+status 'simple'
+status 'detailed'
+```
