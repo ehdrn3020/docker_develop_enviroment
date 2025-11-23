@@ -1,20 +1,84 @@
+#services:
+#  namenode:
+#    image: apache/hadoop:3.3.5
+#    container_name: namenode
+#    hostname: namenode
+#    user: "root:root"
+#    volumes:
+#      - ./hadoop_config:/etc/hadoop_config:ro
+#      - namenode:/tmp/hadoop-root/dfs
+#      - hadoop_conf:/opt/hadoop/etc/hadoop
+#    environment:
+#      ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
+#    command: >
+#      bash -c "env $(grep -vE '^(#|$)' /etc/hadoop_config | tr '\n' ' ') hdfs namenode"
+#    ports:
+#      - "9870:9870"   # NN Web
+#      - "8020:8020"   # NN RPC
+#    networks:
+#      - bigdata
+#
+#  datanode:
+#    image: apache/hadoop:3.3.5
+#    container_name: datanode
+#    hostname: datanode
+#    user: "root:root"
+#    volumes:
+#      - ./hadoop_config:/etc/hadoop_config:ro
+#      - datanode:/tmp/hadoop-root/dfs
+#      - hadoop_conf:/opt/hadoop/etc/hadoop:ro
+#    command: >
+#      bash -c "env $(grep -vE '^(#|$)' /etc/hadoop_config | tr '\n' ' ') hdfs datanode"
+#    ports:
+#      - "9864:9864"   # DN Web
+#    depends_on:
+#      - namenode
+#    networks:
+#      - bigdata
+#
+#  hbase:
+#    image: harisekhon/hbase:2.1
+#    container_name: hbase
+#    hostname: hbase
+#    depends_on:
+#      - namenode
+#      - datanode
+#    ports:
+#      - "8080:8080"    # HBase web
+#      - "16010:16010"  # Master UI
+#      - "8085:8085"    # REST
+#    volumes:
+#      - hadoop_conf:/opt/hadoop/etc/hadoop:ro
+#    environment:
+#      HADOOP_CONF_DIR: /opt/hadoop/etc/hadoop
+#    networks:
+#      - bigdata
+#
+#volumes:
+#  namenode:
+#  datanode:
+#  hadoop_conf:
+#
+#networks:
+#  bigdata:
+#    driver: bridge
+
+
 services:
   namenode:
     image: apache/hadoop:3.3.5
     container_name: namenode
     hostname: namenode
-    user: "root:root"
-    volumes:
-      - ./hadoop_config:/etc/hadoop_config:ro
-      - namenode:/tmp/hadoop-root/dfs
-      - hadoop_conf:/opt/hadoop/etc/hadoop
+    command: ["hdfs", "namenode"]
+    env_file:
+      - ./hadoop_config
     environment:
       ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
-    command: >
-      bash -c "env $(grep -vE '^(#|$)' /etc/hadoop_config | tr '\n' ' ') hdfs namenode"
     ports:
-      - "9870:9870"   # NN Web
-      - "8020:8020"   # NN RPC
+      - "9870:9870"
+      - "8020:8020"
+    volumes:
+      - namenode:/tmp/hadoop-root/dfs
     networks:
       - bigdata
 
@@ -22,42 +86,21 @@ services:
     image: apache/hadoop:3.3.5
     container_name: datanode
     hostname: datanode
-    user: "root:root"
+    command: ["hdfs", "datanode"]
+    env_file:
+      - ./hadoop_config
     volumes:
-      - ./hadoop_config:/etc/hadoop_config:ro
       - datanode:/tmp/hadoop-root/dfs
-      - hadoop_conf:/opt/hadoop/etc/hadoop:ro
-    command: >
-      bash -c "env $(grep -vE '^(#|$)' /etc/hadoop_config | tr '\n' ' ') hdfs datanode"
-    ports:
-      - "9864:9864"   # DN Web
     depends_on:
       - namenode
-    networks:
-      - bigdata
-
-  hbase:
-    image: harisekhon/hbase:2.1
-    container_name: hbase
-    hostname: hbase
-    depends_on:
-      - namenode
-      - datanode
     ports:
-      - "8080:8080"    # HBase web
-      - "16010:16010"  # Master UI
-      - "8085:8085"    # REST
-    volumes:
-      - hadoop_conf:/opt/hadoop/etc/hadoop:ro    # ⬅️ 같은 설정 디렉토리 공유
-    environment:
-      HADOOP_CONF_DIR: /opt/hadoop/etc/hadoop
+      - "9864:9864"
     networks:
       - bigdata
 
 volumes:
   namenode:
   datanode:
-  hadoop_conf:
 
 networks:
   bigdata:
