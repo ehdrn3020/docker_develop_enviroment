@@ -3,10 +3,9 @@ services:
     image: apache/hadoop:3.3.5
     container_name: namenode
     hostname: namenode
-    user: "root:root"
     command: ["hdfs", "namenode"]
     env_file:
-      - hadoop_config
+      - ./hadoop_config
     environment:
       ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
     ports:
@@ -21,10 +20,9 @@ services:
     image: apache/hadoop:3.3.5
     container_name: datanode
     hostname: datanode
-    user: "root:root"
     command: ["hdfs", "datanode"]
     env_file:
-      - hadoop_config
+      - ./hadoop_config
     volumes:
       - datanode:/tmp/hadoop-root/dfs
     depends_on:
