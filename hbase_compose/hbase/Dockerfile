@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk
+FROM amazoncorretto:8
 
 ARG HBASE_VERSION=2.3.1
 ARG HADOOP_VERSION=3.3.1
