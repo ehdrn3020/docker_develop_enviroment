@@ -5,7 +5,7 @@ services:
     hostname: namenode
     user: "root:root"
     volumes:
-      - ./hadoop_config:/etc/hadoop_config:ro
+      - hadoop_config:/etc/hadoop_config:ro
       - namenode:/tmp/hadoop-root/dfs
       - hadoop_conf:/opt/hadoop/etc/hadoop
     environment:
@@ -24,7 +24,7 @@ services:
     hostname: datanode
     user: "root:root"
     volumes:
-      - ./hadoop_config:/etc/hadoop_config:ro
+      - hadoop_config:/etc/hadoop_config:ro
       - datanode:/tmp/hadoop-root/dfs
       - hadoop_conf:/opt/hadoop/etc/hadoop:ro
     command: >
@@ -57,6 +57,7 @@ services:
 volumes:
   namenode:
   datanode:
+  hadoop_conf:
 
 networks:
   bigdata:
