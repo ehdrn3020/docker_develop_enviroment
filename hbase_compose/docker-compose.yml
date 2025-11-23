@@ -1,4 +1,3 @@
-version: "3.8"
 
 services:
   zookeeper:
@@ -11,7 +10,7 @@ services:
       ZOO_MY_ID: 1
       ZOO_SERVERS: server.1=zk:2888:3888
     networks:
-      - nethbase
+      - bigdata
 
   hadoop:
     build:
@@ -25,7 +24,7 @@ services:
     environment:
       TZ: Asia/Seoul
     networks:
-      - nethbase
+      - bigdata
 
   hbase:
     build:
@@ -43,7 +42,7 @@ services:
       HBASE_ZOOKEEPER_QUORUM: zk
       HBASE_ROOTDIR: hdfs://hadoop:8020/hbase
     networks:
-      - nethbase
+      - bigdata
 
 networks:
   bigdata:
