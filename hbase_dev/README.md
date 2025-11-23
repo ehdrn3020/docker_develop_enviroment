@@ -1,5 +1,8 @@
 ## Hadoop 설치
 ```aiignore
+# 참조
+https://hub.docker.com/r/apache/hadoop
+
 # 컨테이너 기동
 sudo docker-compose run --rm namenode hdfs namenode -format
 sudo docker-compose up -d namenode datanode
@@ -25,6 +28,10 @@ sudo docker volume rm hbase_dev_namenode
 
 ## HBase 설치
 ```aiignore
+# 참조
+https://hub.docker.com/r/harisekhon/hbase/
+
+# 접속 확인
 docker exec -it hbase bash
 
 # 프로세스 확인
