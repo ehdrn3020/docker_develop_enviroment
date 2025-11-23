@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  zookeeper:
+    image: zookeeper:3.7.0
+    container_name: zk
+    hostname: zk
+    ports:
+      - "2181:2181"
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zk:2888:3888
+    networks:
+      - nethbase
+
+  hadoop:
+    build:
+      context: ./hadoop
+    container_name: hadoop
+    hostname: hadoop
+    ports:
+      - "9870:9870"  # NameNode UI
+      - "9864:9864"  # DataNode UI
+      - "8020:8020"  # NameNode RPC
+    environment:
+      TZ: Asia/Seoul
+    networks:
+      - nethbase
+
+  hbase:
+    build:
+      context: ./hbase
+    container_name: hbase
+    hostname: hbase
+    depends_on:
+      - zookeeper
+      - hadoop
+    ports:
+      - "16010:16010" # HBase Master UI
+      - "16020:16020" # RegionServer RPC
+    environment:
+      TZ: Asia/Seoul
+      HBASE_ZOOKEEPER_QUORUM: zk
+      HBASE_ROOTDIR: hdfs://hadoop:8020/hbase
+    networks:
+      - nethbase
+
+networks:
+  bigdata:
+    driver: bridge
