@@ -69,6 +69,7 @@ services:
     image: apache/hadoop:3.3.5
     container_name: namenode
     hostname: namenode
+    user: "root:root"
     command: ["hdfs", "namenode"]
     env_file:
       - ./hadoop_config
@@ -86,6 +87,7 @@ services:
     image: apache/hadoop:3.3.5
     container_name: datanode
     hostname: datanode
+    user: "root:root"
     command: ["hdfs", "datanode"]
     env_file:
       - ./hadoop_config
