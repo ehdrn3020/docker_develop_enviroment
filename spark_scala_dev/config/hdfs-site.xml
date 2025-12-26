@@ -10,7 +10,7 @@
   <!-- DataNode 데이터 전송 주소 -->
   <property>
     <name>dfs.datanode.address</name>
-    <value>43.201.36.232:9866</value>
+    <value>server10:9866</value>
   </property>
 
     <!-- DataNode IPC -->
