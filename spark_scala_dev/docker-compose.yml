@@ -10,12 +10,14 @@ services:
           ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
       volumes:
         - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
+        - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
 
    datanode:
       image: apache/hadoop:3
       command: ["hdfs", "datanode"]
       volumes:
         - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
+        - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
 
    resourcemanager:
       image: apache/hadoop:3
@@ -26,10 +28,14 @@ services:
       volumes:
         - ./test.sh:/opt/test.sh
         - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
+        - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+
    nodemanager:
       image: apache/hadoop:3
+      command: ["yarn", "nodemanager"]
       volumes:
         - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
+        - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
 
 
 
