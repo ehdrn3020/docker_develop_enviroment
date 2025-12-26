@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-  <!-- NameNode RPC 주소 (가장 중요) -->
+  <!-- NameNode RPC 주소 -->
   <property>
     <name>dfs.namenode.rpc-address</name>
     <value>namenode:8020</value>
   </property>
 
-  <!-- Web UI 주소 (선택이지만 권장) -->
+  <property>
+    <name>dfs.client.use.datanode.hostname</name>
+    <value>true</value>
+  </property>
+
+  <property>
+    <name>dfs.datanode.hostname</name>
+    <value>${EC2_PUBLIC_IP}</value>
+  </property>
+
+  <!-- Web UI 주소 -->
   <property>
     <name>dfs.namenode.http-address</name>
     <value>namenode:9870</value>
