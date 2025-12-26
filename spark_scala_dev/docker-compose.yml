@@ -4,35 +4,38 @@ services:
       image: apache/hadoop:3
       hostname: namenode
       command: ["hdfs", "namenode"]
-      ports:
-        - 9870:9870
-        - 8020:8020
-        - 9866:9866
+#      ports:
+#        - 9870:9870
+#        - 8020:8020
+#        - 9866:9866
       environment:
           ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
       volumes:
         - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
         - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+      network_mode: host
 
    datanode:
       image: apache/hadoop:3
       command: ["hdfs", "datanode"]
-      ports:
-        - 9864:9864
+#      ports:
+#        - 9864:9864
       volumes:
         - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
         - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+      network_mode: host
 
    resourcemanager:
       image: apache/hadoop:3
       hostname: resourcemanager
       command: ["yarn", "resourcemanager"]
-      ports:
-         - 8088:8088
+#      ports:
+#         - 8088:8088
       volumes:
         - ./test.sh:/opt/test.sh
         - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
         - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+      network_mode: host
 
    nodemanager:
       image: apache/hadoop:3
@@ -40,6 +43,7 @@ services:
       volumes:
         - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
         - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+      network_mode: host
 
 
 

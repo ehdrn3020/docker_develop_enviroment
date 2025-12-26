@@ -4,29 +4,55 @@
   <!-- NameNode RPC 주소 -->
   <property>
     <name>dfs.namenode.rpc-address</name>
-    <value>namenode:8020</value>
+    <value>server_hadoop:8020</value>
   </property>
 
+  <!-- DataNode 데이터 전송 주소 -->
   <property>
-    <name>dfs.client.use.datanode.hostname</name>
+    <name>dfs.datanode.address</name>
+    <value>server_hadoop:9866</value>
+  </property>
+
+    <!-- DataNode IPC -->
+  <property>
+    <name>dfs.datanode.ipc.address</name>
+    <value>server_hadoop:9867</value>
+  </property>
+
+  <!-- DataNode Web UI / WebHDFS -->
+  <property>
+    <name>dfs.datanode.http.address</name>
+    <value>server_hadoop:9864</value>
+  </property>
+
+  <!-- WebHDFS 활성화 -->
+  <property>
+    <name>dfs.webhdfs.enabled</name>
     <value>true</value>
   </property>
 
+  <!-- DataNode가 hostname 기반으로 자신을 광고 -->
   <property>
-    <name>dfs.datanode.hostname</name>
-    <value>datanode</value>
+    <name>dfs.datanode.use.datanode.hostname</name>
+    <value>true</value>
   </property>
 
-  <!-- Web UI 주소 -->
+  <!-- DataNode hostname (host 네트워크 기준) -->
   <property>
-    <name>dfs.namenode.http-address</name>
-    <value>namenode:9870</value>
+    <name>dfs.datanode.hostname</name>
+    <value>server_hadoop</value>
   </property>
 
   <!-- 단일 DataNode 환경 -->
   <property>
     <name>dfs.replication</name>
     <value>1</value>
+  </property>
+
+  <!-- Web UI 주소 -->
+  <property>
+    <name>dfs.namenode.http-address</name>
+    <value>hadoop_host:9870</value>
   </property>
 
   <!-- 파일 권한 체크 -->
