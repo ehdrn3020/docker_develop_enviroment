@@ -19,10 +19,15 @@
     <value>1</value>
   </property>
 
-  <!-- WebHDFS 활성화 -->
+  <!-- 파일 권한 체크 -->
   <property>
     <name>dfs.permissions.enabled</name>
-    <value>true</value>
+    <value>false</value>
   </property>
 
+  <!-- WebHDFS 활성화 -->
+  <property>
+    <name>dfs.webhdfs.enabled</name>
+    <value>true</value>
+  </property>
 </configuration>
