@@ -19,10 +19,10 @@
     <value>1</value>
   </property>
 
-  <!-- Docker 환경에서 권장 (경고/대기 줄이기) -->
+  <!-- WebHDFS 활성화 -->
   <property>
     <name>dfs.permissions.enabled</name>
-    <value>false</value>
+    <value>true</value>
   </property>
 
 </configuration>
