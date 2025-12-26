@@ -8,10 +8,14 @@ services:
         - 9870:9870
       environment:
           ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
+      volumes:
+        - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
 
    datanode:
       image: apache/hadoop:3
       command: ["hdfs", "datanode"]
+      volumes:
+        - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
 
    resourcemanager:
       image: apache/hadoop:3
@@ -21,7 +25,11 @@ services:
          - 8088:8088
       volumes:
         - ./test.sh:/opt/test.sh
+        - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
    nodemanager:
       image: apache/hadoop:3
+      volumes:
+        - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
+
 
 
