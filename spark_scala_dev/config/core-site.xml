@@ -1,6 +1,6 @@
 <configuration>
   <property>
     <name>fs.defaultFS</name>
-    <value>hdfs://server_hadoop</value>
+    <value>hdfs://server10</value>
   </property>
 </configuration>
