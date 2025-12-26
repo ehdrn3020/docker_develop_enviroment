@@ -52,7 +52,7 @@
   <!-- Web UI 주소 -->
   <property>
     <name>dfs.namenode.http-address</name>
-    <value>hadoop_host:9870</value>
+    <value>server_hadoop:9870</value>
   </property>
 
   <!-- 파일 권한 체크 -->
