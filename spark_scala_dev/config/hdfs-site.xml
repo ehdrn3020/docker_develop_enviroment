@@ -14,7 +14,7 @@
 
   <property>
     <name>dfs.datanode.hostname</name>
-    <value>${EC2_PUBLIC_IP}</value>
+    <value>datanode</value>
   </property>
 
   <!-- Web UI 주소 -->
