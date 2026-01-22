@@ -1,1 +1,3 @@
 .idea/*
+clickhouse_dev/data/*
+clickhouse_dev/logs/*
