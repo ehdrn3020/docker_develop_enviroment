@@ -1,0 +1,15 @@
+services:
+  grafana:
+    image: grafana/grafana:9.4.3
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # 기본 관리자 계정
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      # (선택) 회원가입 막기
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      # (선택) 타임존
+      TZ: Asia/Seoul
