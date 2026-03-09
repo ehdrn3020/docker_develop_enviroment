@@ -1,0 +1,18 @@
+services:
+  hyperdx:
+    image: docker.hyperdx.io/hyperdx/hyperdx
+    container_name: hyperdx
+    restart: unless-stopped
+    environment:
+      MONGO_URI: mongodb://admin:admin@mongodb-hyperdx:27017/hyperdx?authSource=admin
+      FRONTEND_URL: http://localhost:8080
+      HYPERDX_APP_URL: http://localhost:8080
+      BETA_CH_OTEL_JSON_SCHEMA_ENABLED: "true"
+    ports:
+      - "8080:8080"
+    networks:
+      - bigdata
+
+networks:
+  bigdata:
+    external: true

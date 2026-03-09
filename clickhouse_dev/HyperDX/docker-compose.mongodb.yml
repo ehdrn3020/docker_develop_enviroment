@@ -1,0 +1,16 @@
+services:
+  mongodb-hyperdx:
+    image: mongo:7
+    container_name: mongodb-hyperdx
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - "27017:27017"
+    networks:
+      - bigdata
+
+networks:
+  bigdata:
+    external: true
