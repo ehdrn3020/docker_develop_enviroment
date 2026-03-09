@@ -2,6 +2,7 @@
 ```declarative
 - 이미 clickhouse docker가 설치되어 있다고 가정
 - HyperDX 메타데이터를 저장하기 위한 MongoDB Docker 설치가 필요
+- 참고 : https://clickhouse.com/docs/use-cases/observability/clickstack/deployment/hyperdx-only
 ```
 
 ## Install Hyper DK
