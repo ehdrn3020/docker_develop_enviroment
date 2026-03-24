@@ -9,25 +9,36 @@ services:
       - ./hadoop_config
     environment:
       ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
+    ports:
+      - "9870:9870"
+      - "8020:8020"
     volumes:
+      # HDFS 네임노드 데이터 → ./data/namenode
       - ./data/namenode:/tmp/hadoop-root/dfs
+      # Hadoop 설정 디렉토리 공유 → ./hadoop_conf
       - ./hadoop_conf:/opt/hadoop/etc/hadoop
-    network_mode: host
+    networks:
+      - bigdata
 
   datanode:
     image: apache/hadoop:3.3.5
     container_name: datanode
     hostname: datanode
     user: "root:root"
-    command: [ "hdfs", "datanode" ]
+    command: ["hdfs", "datanode"]
     env_file:
       - ./hadoop_config
     volumes:
+      # HDFS 데이터노드 데이터 → ./data/datanode
       - ./data/datanode:/tmp/hadoop-root/dfs
+      # 같은 Hadoop 설정 디렉토리 사용
       - ./hadoop_conf:/opt/hadoop/etc/hadoop
     depends_on:
       - namenode
-    network_mode: host
+    ports:
+      - "9864:9864"
+    networks:
+      - bigdata
 
   hbase:
     image: harisekhon/hbase:2.1
@@ -36,9 +47,18 @@ services:
     depends_on:
       - namenode
       - datanode
+    ports:
+      - "8080:8080"    # HBase web
+      - "16010:16010"  # Master UI
+      - "8085:8085"    # REST
     volumes:
+      # Hadoop 설정을 그대로 참조
       - ./hadoop_conf:/opt/hadoop/etc/hadoop
     environment:
       HADOOP_CONF_DIR: /opt/hadoop/etc/hadoop
-    network_mode: host
+    networks:
+      - bigdata
 
+networks:
+  bigdata:
+    driver: bridge
