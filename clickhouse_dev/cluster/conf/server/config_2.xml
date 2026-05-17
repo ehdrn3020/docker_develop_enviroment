@@ -7,7 +7,7 @@
         <count>3</count>
     </logger>
 
-    <display_name>cluster_2S_2R node 3</display_name>
+    <display_name>cluster_2S_2R node 2</display_name>
 
     <listen_host>0.0.0.0</listen_host>
     <http_port>8123</http_port>
@@ -68,7 +68,7 @@
         </node>
     </zookeeper>
     <macros>
-        <shard>03</shard>
-        <replica>03</replica>
+        <shard>02</shard>
+        <replica>01</replica>
     </macros>
 </clickhouse>

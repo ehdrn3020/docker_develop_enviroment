@@ -7,7 +7,7 @@ services:
     hostname: clickhouse-01
     volumes:
       - ./conf/server/config_1.xml:/etc/clickhouse-server/config.d/config.xml
-      - ./conf/server/users_1.xml:/etc/clickhouse-server/users.d/users.xml
+      - ./conf/server/users.xml:/etc/clickhouse-server/users.d/users.xml
     ports:
       - "127.0.0.1:8123:8123"
       - "127.0.0.1:9000:9000"
@@ -22,7 +22,7 @@ services:
     hostname: clickhouse-02
     volumes:
       - ./conf/server/config_2.xml:/etc/clickhouse-server/config.d/config.xml
-      - ./conf/server/users_2.xml:/etc/clickhouse-server/users.d/users.xml
+      - ./conf/server/users.xml:/etc/clickhouse-server/users.d/users.xml
     ports:
       - "127.0.0.1:8124:8123"
       - "127.0.0.1:9001:9000"
@@ -37,7 +37,7 @@ services:
     hostname: clickhouse-03
     volumes:
       - ./conf/server/config_3.xml:/etc/clickhouse-server/config.d/config.xml
-      - ./conf/server/users_3.xml:/etc/clickhouse-server/users.d/users.xml
+      - ./conf/server/users.xml:/etc/clickhouse-server/users.d/users.xml
     ports:
       - "127.0.0.1:8125:8123"
       - "127.0.0.1:9002:9000"
@@ -52,7 +52,7 @@ services:
     hostname: clickhouse-04
     volumes:
       - ./conf/server/config_4.xml:/etc/clickhouse-server/config.d/config.xml
-      - ./conf/server/users_4.xml:/etc/clickhouse-server/users.d/users.xml
+      - ./conf/server/users.xml:/etc/clickhouse-server/users.d/users.xml
     ports:
       - "127.0.0.1:8126:8123"
       - "127.0.0.1:9003:9000"
