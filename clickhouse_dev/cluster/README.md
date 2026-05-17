@@ -27,7 +27,7 @@
 
 ## execution
 ```bash
-cd /mnt/c/Users/dgkang/DevProject/docker_develop_enviroment/clickhouse_dev/ccluster
+cd .\clickhouse_dev\cluster\
 docker compose up -d
 
 # 상태 확인
