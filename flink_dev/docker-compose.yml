@@ -5,11 +5,8 @@ services:
     ports:
       - "8081:8081"
     command: jobmanager
-    environment:
-      - |
-        FLINK_PROPERTIES=
-        jobmanager.rpc.address: jobmanager
-        parallelism.default: 2
+    volumes:
+      - ./conf:/opt/flink/conf:ro
 
   taskmanager-1:
     image: flink:2.2.0-scala_2.12
@@ -17,11 +14,8 @@ services:
     depends_on:
       - jobmanager
     command: taskmanager
-    environment:
-      FLINK_PROPERTIES: |
-        jobmanager.rpc.address: jobmanager
-        taskmanager.numberOfTaskSlots: 2
-        parallelism.default: 2
+    volumes:
+      - ./conf:/opt/flink/conf:ro
 
   taskmanager-2:
     image: flink:2.2.0-scala_2.12
@@ -29,8 +23,5 @@ services:
     depends_on:
       - jobmanager
     command: taskmanager
-    environment:
-      FLINK_PROPERTIES: |
-        jobmanager.rpc.address: jobmanager
-        taskmanager.numberOfTaskSlots: 2
-        parallelism.default: 2
+    volumes:
+      - ./conf:/opt/flink/conf:ro
