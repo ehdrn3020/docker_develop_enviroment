@@ -77,6 +77,11 @@
             <port>9181</port>
         </node>
     </zookeeper>
+
+    <kafka>
+        <auto_offset_reset>latest</auto_offset_reset>
+    </kafka>
+
     <macros>
         <shard>01</shard>
         <replica>01</replica>
